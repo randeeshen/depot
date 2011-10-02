@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pragprog Books Online Store</title>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tag %><!-- <label id="code.csrf"/> -->
+</head>
+<body id="store">
+  <div id="banner">
+    <%= form_tag store_path, :class => 'locale' do %>
+      <%= select_tag 'set_locale', 
+            options_for_select(LANGUAGES, I18n.locale.to_s),
+            :onchange => 'this.form.submit()' %>
+      <%= submit_tag 'submit' %>
+      <%= javascript_tag "$('.locale input').hide()" %>
+    <% end %>
+    <%= image_tag "logo.png"  %>
+    <%= @page_title || t('.title') %><!-- <label id="code.depot.e.title"/> -->
+  </div>
+  <div id="columns">
+    <div id="side">
+      <% if @cart %>
+        <%= hidden_div_if(@cart.line_items.empty?, :id => 'cart') do %>
+          <%= render @cart %>
+        <% end %>
+      <% end %>
+      <a href="/"><%= t('.home') %></a><br />
+      <a href="/"><%= t('.questions') %></a><br />
+      <a href="/"><%= t('.news') %></a><br />
+      <a href="/"><%= t('.contact') %></a><br />
+
+      <% if session[:user_id] %>
+        <br />
+        <%= link_to 'Orders', orders_path %><br />
+        <%= link_to 'Products', products_path %><br />
+        <%= link_to 'Users', users_path %><br />
+        <br />
+        <%= button_to 'Logout', logout_path, :method => :delete %>
+      <% end %>
+
+      <div id="time">Date: <%= Time.now.strftime('%A, %B %Y') %></div>
+
+    </div>
+    <div id="main">
+      <%= yield %><!-- <label id="code.depot.e.include"/> -->
+    </div>
+  </div>
+</body>
+</html>

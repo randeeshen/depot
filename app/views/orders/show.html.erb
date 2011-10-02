@@ -1,0 +1,42 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<p>
+  <b>Name:</b>
+  <%= @order.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @order.address %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @order.email %>
+</p>
+
+<p>
+  <b>Pay type:</b>
+  <%= @order.pay_type %>
+</p>
+
+<% hidden_div_if(@order.line_items.count == 0, :id => 'order-items') do %>
+<div id="order-items">
+  <table>
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%=render :partial => 'orders/line_item', :collection => @order.line_items %>
+  </table>
+</div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

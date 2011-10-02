@@ -1,0 +1,15 @@
+<div class="cart_title">Your Pragmatic Cart</div>
+<table>
+  <%= render(cart.line_items) %>
+  <tr class="total_line">
+    <td colspan="2">Total</td>
+    <td class="total_cell"><%= total_cost(cart.line_items) %></td>
+  </tr>
+</table>
+
+<%= hidden_div_if !@order.nil?  do %>
+  <%= button_to 'Checkout', new_order_path, :method => :get  %>
+  <%= button_to 'Empty Cart', cart, :method => :delete, :confirm => 'Are you sure?', :remote => true %>
+<% end %>
+
+<%= link_to 'Back', store_path %>

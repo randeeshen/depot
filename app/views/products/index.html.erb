@@ -1,0 +1,14 @@
+<div id="product_list">
+  <h1>Listing Products</h1>
+  <table>
+    <%= render @products %>
+  </table>
+  <br />
+  <%= link_to 'New', new_product_path %>
+  <h1>Inactive Listing Products</h1>
+  <table>
+    <%= render @inactive_products %>
+  </table>
+  <br />
+</div>
+

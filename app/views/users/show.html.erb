@@ -1,0 +1,22 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p id="created">
+  <b>Created at:</b>
+  <%= @user.created_at %>
+</p>
+
+<p>
+  <b>Last update:</b>
+  <%= @user.updated_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

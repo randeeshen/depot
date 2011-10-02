@@ -1,0 +1,15 @@
+<tr class="<%=cycle('list_line_odd', 'list_line_even')%>">
+  <td><%= image_tag(product.image_url, :class=>'list_image')%></td>
+  <td class="list_description">
+    <dl>
+      <dt><%= product.title %></dt>
+      <dd><%= truncate(strip_tags(product.description), :length => 80) %></dd>
+      <dd>Default language: <%= product.locale %></dd>
+    </dl> 
+  </td>
+  <td class="list_actions">
+    <%= link_to 'Show', product %><br />
+    <%= link_to 'Edit', edit_product_path(product) %><br />
+    <%= link_to 'Disable', product, :confirm => "Are you sure?", :method => :delete %>
+  </td>
+</tr> 
